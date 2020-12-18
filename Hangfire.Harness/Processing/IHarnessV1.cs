@@ -1,7 +1,15 @@
-﻿namespace Hangfire.Harness.Processing
+﻿using System.Threading.Tasks;
+using Hangfire.Server;
+
+namespace Hangfire.Harness.Processing
 {
     public interface IHarnessV1
     {
-        void Perform(int value);
+        Task Perform(int delay);
+
+        [Queue("{0}")]
+        Task Perform(string queue);
+        Task<bool> FeedJobs(PerformContext context, int count);
+        Task<int> Maintenance();
     }
 }
