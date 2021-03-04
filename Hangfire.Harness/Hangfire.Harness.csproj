@@ -209,6 +209,7 @@
     </Compile>
     <Compile Include="Processing\IHarnessV1.cs" />
     <Compile Include="Processing\TestHarness.cs" />
+    <Compile Include="Processing\TestHarnessProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

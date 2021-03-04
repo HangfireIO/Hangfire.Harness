@@ -38,7 +38,7 @@ namespace Hangfire.Harness
                 .UseAutofacActivator(builder.Build())
                 .UseSimpleAssemblyNameTypeSerializer()
                 .UseSerilogLogProvider()
-                .UseSqlServerStorage("HangfireStorage", new SqlServerStorageOptions
+                /*.UseSqlServerStorage("HangfireStorage", new SqlServerStorageOptions
                 {
                     UseRecommendedIsolationLevel = true,
                     CommandBatchMaxTimeout = TimeSpan.FromMinutes(1),
@@ -46,19 +46,21 @@ namespace Hangfire.Harness
                     QueuePollInterval = TimeSpan.Zero,
                     DashboardJobListLimit = 1000,
                     DisableGlobalLocks = true,
-                })
-                //.UseRedisMetrics()
-                //.UseRedisStorage(ConfigurationManager.AppSettings["RedisStorage"])
+                })*/
+                .UseRedisMetrics()
+                .UseRedisStorage(ConfigurationManager.AppSettings["RedisStorage"])
                 .WithJobExpirationTimeout(TimeSpan.FromHours(1));
 
-            RecurringJob.AddOrUpdate<IHarnessV1>(x => x.Maintenance(), Cron.Daily(01, 00));
-            RecurringJob.AddOrUpdate<IHarnessV1>(x => x.FeedJobs(null, 1000), "*/10 * * * * *");
+            //RecurringJob.AddOrUpdate<IHarnessV1>(x => x.Maintenance(), Cron.Daily(01, 00));
 
-            yield return new BackgroundJobServer(new BackgroundJobServerOptions
-            {
-                WorkerCount = Environment.ProcessorCount * 5, 
-                TaskScheduler = null
-            });
+            yield return new BackgroundJobServer(
+                new BackgroundJobServerOptions
+                {
+                    SchedulePollingInterval = TimeSpan.FromSeconds(1),
+                    TaskScheduler = null,
+                },
+                JobStorage.Current,
+                new[] { new TestHarnessProcess(3000, TimeSpan.FromSeconds(5)) });
         }
 
         public void Configuration(IAppBuilder app)

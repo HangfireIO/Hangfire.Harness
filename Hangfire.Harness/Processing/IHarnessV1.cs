@@ -9,7 +9,6 @@ namespace Hangfire.Harness.Processing
 
         [Queue("{0}")]
         Task Perform(string queue);
-        Task<bool> FeedJobs(PerformContext context, int count);
         Task<int> Maintenance();
     }
 }
