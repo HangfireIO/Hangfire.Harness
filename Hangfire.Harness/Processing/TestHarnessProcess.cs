@@ -21,6 +21,7 @@ namespace Hangfire.Harness.Processing
             if (monitoringApi.EnqueuedCount("default") > _count)
             {
                 context.Wait(_delay);
+                return;
             }
 
             var client = new BackgroundJobClient(context.Storage)
