@@ -38,20 +38,17 @@ namespace Hangfire.Harness
                 .UseAutofacActivator(builder.Build())
                 .UseSimpleAssemblyNameTypeSerializer()
                 .UseSerilogLogProvider()
+                .UseDarkModeSupportForDashboard()
                 /*.UseSqlServerStorage("HangfireStorage", new SqlServerStorageOptions
                 {
-                    UseRecommendedIsolationLevel = true,
-                    CommandBatchMaxTimeout = TimeSpan.FromMinutes(1),
-                    SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
-                    QueuePollInterval = TimeSpan.Zero,
                     DashboardJobListLimit = 1000,
-                    DisableGlobalLocks = true,
+                    EnableHeavyMigrations = true
                 })*/
                 .UseRedisMetrics()
                 .UseRedisStorage(ConfigurationManager.AppSettings["RedisStorage"])
                 .WithJobExpirationTimeout(TimeSpan.FromHours(1));
 
-            //RecurringJob.AddOrUpdate<IHarnessV1>(x => x.Maintenance(), Cron.Daily(01, 00));
+            //RecurringJob.AddOrUpdate<IHarnessV1>("IHarnessV1.Maintenance", x => x.Maintenance(), Cron.Daily(01, 00));
 
             yield return new BackgroundJobServer(
                 new BackgroundJobServerOptions
