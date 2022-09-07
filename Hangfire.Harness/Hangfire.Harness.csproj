@@ -230,6 +230,9 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\hangfire-harness - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\hangfire-harness - Web Deploy1.pubxml" />
+    <None Include="Properties\PublishProfiles\hangfire-harness-redis - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.min.js" />
