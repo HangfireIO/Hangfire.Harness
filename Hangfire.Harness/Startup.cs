@@ -31,7 +31,8 @@ namespace Hangfire.Harness
                 .UseSqlServerStorage("HangfireStorage", new SqlServerStorageOptions
                 {
                     DashboardJobListLimit = 1000,
-                    EnableHeavyMigrations = true
+                    EnableHeavyMigrations = true,
+                    InactiveStateExpirationTimeout = TimeSpan.FromMinutes(5)
                 })
                 //.UseRedisMetrics()
                 //.UseRedisStorage(ConfigurationManager.AppSettings["RedisStorage"])

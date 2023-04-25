@@ -68,13 +68,13 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Hangfire.Core, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hangfire.Core.1.8.0-rc3\lib\net46\Hangfire.Core.dll</HintPath>
+      <HintPath>..\packages\Hangfire.Core.1.8.0-rc4\lib\net46\Hangfire.Core.dll</HintPath>
     </Reference>
     <Reference Include="Hangfire.Pro.Redis, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hangfire.Pro.Redis.3.0.0-beta2\lib\net46\Hangfire.Pro.Redis.dll</HintPath>
+      <HintPath>..\packages\Hangfire.Pro.Redis.3.0.0-rc1\lib\net46\Hangfire.Pro.Redis.dll</HintPath>
     </Reference>
     <Reference Include="Hangfire.SqlServer, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hangfire.SqlServer.1.8.0-rc3\lib\net451\Hangfire.SqlServer.dll</HintPath>
+      <HintPath>..\packages\Hangfire.SqlServer.1.8.0-rc4\lib\net451\Hangfire.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
