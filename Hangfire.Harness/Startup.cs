@@ -28,17 +28,17 @@ namespace Hangfire.Harness
                 .UseAutofacActivator(builder.Build())
                 .UseSimpleAssemblyNameTypeSerializer()
                 .UseSerilogLogProvider()
-                .UseSqlServerStorage("HangfireStorage", new SqlServerStorageOptions
+                /*.UseSqlServerStorage("HangfireStorage", new SqlServerStorageOptions
                 {
                     DashboardJobListLimit = 1000,
                     EnableHeavyMigrations = true,
                     InactiveStateExpirationTimeout = TimeSpan.FromMinutes(5)
-                })
-                //.UseRedisMetrics()
-                //.UseRedisStorage(ConfigurationManager.AppSettings["RedisStorage"])
+                })*/
+                .UseRedisMetrics()
+                .UseRedisStorage(ConfigurationManager.AppSettings["RedisStorage"])
                 .WithJobExpirationTimeout(TimeSpan.FromHours(1));
 
-            RecurringJob.AddOrUpdate<IHarnessV1>("IHarnessV1.Maintenance", x => x.Maintenance(), Cron.Daily(01, 00));
+            //RecurringJob.AddOrUpdate<IHarnessV1>("IHarnessV1.Maintenance", x => x.Maintenance(), Cron.Daily(01, 00));
 
             yield return new BackgroundJobServer(
                 new BackgroundJobServerOptions
