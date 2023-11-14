@@ -1,9 +1,8 @@
 ﻿using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 using Dapper;
-using Hangfire.Server;
 
 namespace Hangfire.Harness.Processing
 {
