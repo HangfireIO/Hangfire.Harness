@@ -27,18 +27,28 @@ namespace Hangfire.Harness
                 .UseRecommendedSerializerSettings()
                 .UseAutofacActivator(builder.Build())
                 .UseSimpleAssemblyNameTypeSerializer()
-                .UseSerilogLogProvider()
-                /*.UseSqlServerStorage("HangfireStorage", new SqlServerStorageOptions
-                {
-                    DashboardJobListLimit = 1000,
-                    EnableHeavyMigrations = true,
-                    InactiveStateExpirationTimeout = TimeSpan.FromMinutes(5)
-                })*/
-                .UseRedisMetrics()
-                .UseRedisStorage(ConfigurationManager.AppSettings["RedisStorage"])
-                .WithJobExpirationTimeout(TimeSpan.FromHours(1));
+                .UseSerilogLogProvider();
 
-            //RecurringJob.AddOrUpdate<IHarnessV1>("IHarnessV1.Maintenance", x => x.Maintenance(), Cron.Daily(01, 00));
+            if (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["RedisStorage"]))
+            {
+                GlobalConfiguration.Configuration
+                    .UseRedisStorage(ConfigurationManager.AppSettings["RedisStorage"])
+                    .WithJobExpirationTimeout(TimeSpan.FromHours(1))
+                    .UseRedisMetrics();
+            }
+            else
+            {
+                GlobalConfiguration.Configuration
+                    .UseSqlServerStorage("HangfireStorage", new SqlServerStorageOptions
+                    {
+                        DashboardJobListLimit = 1000,
+                        EnableHeavyMigrations = true,
+                        InactiveStateExpirationTimeout = TimeSpan.FromMinutes(5)
+                    })
+                    .WithJobExpirationTimeout(TimeSpan.FromHours(1));
+
+                RecurringJob.AddOrUpdate<IHarnessV1>("IHarnessV1.Maintenance", x => x.Maintenance(), Cron.Daily(01, 00));
+            }
 
             yield return new BackgroundJobServer(
                 new BackgroundJobServerOptions
