@@ -50,6 +50,8 @@ namespace Hangfire.Harness
                 RecurringJob.AddOrUpdate<IHarnessV1>("IHarnessV1.Maintenance", x => x.Maintenance(), Cron.Daily(01, 00));
             }
 
+            RecurringJob.AddOrUpdate<IHarnessV1>("Infinite", x => x.Infinite(default), Cron.Never);
+
             yield return new BackgroundJobServer(
                 new BackgroundJobServerOptions
                 {

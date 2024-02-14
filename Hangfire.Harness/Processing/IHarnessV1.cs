@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Hangfire.Server;
 
 namespace Hangfire.Harness.Processing
@@ -10,5 +11,7 @@ namespace Hangfire.Harness.Processing
         [Queue("{0}")]
         Task Perform(string queue);
         Task<int> Maintenance();
+        
+        bool Infinite(CancellationToken token);
     }
 }

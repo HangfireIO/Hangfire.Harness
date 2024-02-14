@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Data;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Dapper;
@@ -28,6 +29,11 @@ namespace Hangfire.Harness.Processing
                     mode = "smart"
                 }, commandType: CommandType.StoredProcedure, commandTimeout: 0);
             }
+        }
+
+        public bool Infinite(CancellationToken token)
+        {
+            return token.WaitHandle.WaitOne(Timeout.Infinite);
         }
     }
 }
