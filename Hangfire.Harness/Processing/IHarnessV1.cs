@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Hangfire.Server;
 
 namespace Hangfire.Harness.Processing
 {
@@ -11,7 +10,8 @@ namespace Hangfire.Harness.Processing
         [Queue("{0}")]
         Task Perform(string queue);
         Task<int> Maintenance();
-        
+
+        [ProlongExpiration(expirationTimeMinutes: 60 * 24 * 365)]
         bool Infinite(CancellationToken token);
     }
 }
