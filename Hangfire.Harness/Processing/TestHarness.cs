@@ -33,7 +33,9 @@ namespace Hangfire.Harness.Processing
 
         public bool Infinite(CancellationToken token)
         {
-            return token.WaitHandle.WaitOne(Timeout.Infinite);
+            var waitResult = token.WaitHandle.WaitOne(Timeout.Infinite);
+            token.ThrowIfCancellationRequested();
+            return waitResult;
         }
     }
 }
