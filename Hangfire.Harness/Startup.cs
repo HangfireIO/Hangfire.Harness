@@ -67,7 +67,8 @@ namespace Hangfire.Harness
             app.UseHangfireAspNet(ConfigureHangfire);
             app.UseHangfireDashboard("/hangfire", new DashboardOptions
             {
-                Authorization = new IDashboardAuthorizationFilter[0]
+                Authorization = new IDashboardAuthorizationFilter[0],
+                IsReadOnlyFunc = _ => true
             });
         }
     }
