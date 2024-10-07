@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace Hangfire.Harness.Processing
 
         public async Task Perform(string queue)
         {
-            await Task.Yield();
+            throw new Exception("");
         }
 
         public async Task<int> Maintenance()

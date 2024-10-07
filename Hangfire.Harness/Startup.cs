@@ -59,7 +59,7 @@ namespace Hangfire.Harness
                     TaskScheduler = null,
                 },
                 JobStorage.Current,
-                new[] { new TestHarnessProcess(3000, TimeSpan.FromSeconds(5)) });
+                new[] { new TestHarnessProcess(10, TimeSpan.FromSeconds(5)) });
         }
 
         public void Configuration(IAppBuilder app)
