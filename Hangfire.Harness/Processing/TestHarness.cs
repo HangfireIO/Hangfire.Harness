@@ -10,7 +10,6 @@ namespace Hangfire.Harness.Processing
 {
     public class TestHarness : IHarnessV1
     {
-        [AutomaticRetry(Attempts = 1, OnAttemptsExceeded = AttemptsExceededAction.Delete)]
         public Task Perform(int delay)
         {
             throw new Exception("");
