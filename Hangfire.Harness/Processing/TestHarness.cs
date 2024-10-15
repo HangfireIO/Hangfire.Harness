@@ -12,7 +12,7 @@ namespace Hangfire.Harness.Processing
     {
         public Task Perform(int delay)
         {
-            throw new Exception("");
+            return Task.CompletedTask;
         }
 
         public async Task Perform(string queue)
