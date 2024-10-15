@@ -5,6 +5,7 @@ namespace Hangfire.Harness.Processing
 {
     public interface IHarnessV1
     {
+        [AutomaticRetry(Attempts = 1, OnAttemptsExceeded = AttemptsExceededAction.Delete)]
         Task Perform(int delay);
 
         [Queue("{0}")]
