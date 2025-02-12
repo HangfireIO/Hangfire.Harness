@@ -71,8 +71,8 @@
     <Reference Include="Hangfire.Core, Version=1.8.17.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Hangfire.Core.1.8.17\lib\net46\Hangfire.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Hangfire.Pro.Redis, Version=3.0.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hangfire.Pro.Redis.3.0.10\lib\net46\Hangfire.Pro.Redis.dll</HintPath>
+    <Reference Include="Hangfire.Pro.Redis, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Pro.Redis.3.1.1\lib\net46\Hangfire.Pro.Redis.dll</HintPath>
     </Reference>
     <Reference Include="Hangfire.SqlServer, Version=1.8.17.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Hangfire.SqlServer.1.8.17\lib\net451\Hangfire.SqlServer.dll</HintPath>
