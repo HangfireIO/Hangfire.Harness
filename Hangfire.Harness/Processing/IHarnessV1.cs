@@ -13,6 +13,7 @@ namespace Hangfire.Harness.Processing
         Task<int> Maintenance();
 
         [ProlongExpiration(expirationTimeMinutes: 60 * 24 * 365)]
+        [SkipWhenPreviousJobIsRunning]
         bool Infinite(CancellationToken token);
     }
 }

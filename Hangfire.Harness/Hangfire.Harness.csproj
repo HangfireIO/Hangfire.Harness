@@ -331,6 +331,7 @@
     </Compile>
     <Compile Include="Processing\IHarnessV1.cs" />
     <Compile Include="Processing\ProlongExpirationAttribute.cs" />
+    <Compile Include="Processing\SkipWhenPreviousJobIsRunningAttribute.cs" />
     <Compile Include="Processing\TestHarness.cs" />
     <Compile Include="Processing\TestHarnessProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
