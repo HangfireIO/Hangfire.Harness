@@ -6,6 +6,7 @@ using Autofac;
 using Hangfire.Dashboard;
 using Hangfire.Harness;
 using Hangfire.Harness.Processing;
+using Hangfire.Pro.Redis;
 using Hangfire.SqlServer;
 using Microsoft.Owin;
 using Owin;
@@ -32,7 +33,10 @@ namespace Hangfire.Harness
             if (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["RedisStorage"]))
             {
                 GlobalConfiguration.Configuration
-                    .UseRedisStorage(ConfigurationManager.AppSettings["RedisStorage"])
+                    .UseRedisStorage(ConfigurationManager.AppSettings["RedisStorage"], new RedisStorageOptions
+                    {
+                        UseExperimentalTransactions = true
+                    })
                     .WithJobExpirationTimeout(TimeSpan.FromHours(1))
                     .UseRedisMetrics();
             }
