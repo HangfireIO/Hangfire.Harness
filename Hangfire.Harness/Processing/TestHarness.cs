@@ -32,11 +32,22 @@ namespace Hangfire.Harness.Processing
             }
         }
 
-        public bool Infinite(CancellationToken token)
+        public async Task Infinite(CancellationToken token)
         {
-            var waitResult = token.WaitHandle.WaitOne(Timeout.Infinite);
+            while (!token.IsCancellationRequested)
+            {
+                var requestUri = Environment.GetEnvironmentVariable("PULSE_INFINITE_URI");
+
+                if (!String.IsNullOrWhiteSpace(requestUri))
+                {
+                    var response = await TestHarnessProcess.UpdownHttpClient.GetAsync(requestUri, token);
+                    response.EnsureSuccessStatusCode();
+                }
+
+                await Task.Delay(TimeSpan.FromHours(1), token);
+            }
+
             token.ThrowIfCancellationRequested();
-            return waitResult;
         }
     }
 }

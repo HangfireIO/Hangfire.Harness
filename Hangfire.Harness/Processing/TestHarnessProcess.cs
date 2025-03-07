@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Net.Http;
 using Hangfire.Server;
 
 namespace Hangfire.Harness.Processing
 {
     public sealed class TestHarnessProcess : IBackgroundProcess
     {
+        internal static readonly HttpClient UpdownHttpClient = new HttpClient
+        {
+            BaseAddress = new Uri("https://pulse.updown.io")
+        };
+
         private readonly int _count;
         private readonly TimeSpan _delay;
 
