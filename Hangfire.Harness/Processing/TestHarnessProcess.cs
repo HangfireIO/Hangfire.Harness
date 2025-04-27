@@ -6,6 +6,8 @@ namespace Hangfire.Harness.Processing
 {
     public sealed class TestHarnessProcess : IBackgroundProcess
     {
+        private static readonly TimeSpan RecurringJobUpdateInterval = TimeSpan.FromMinutes(15);
+
         internal static readonly HttpClient UpdownHttpClient = new HttpClient
         {
             BaseAddress = new Uri("https://pulse.updown.io")
@@ -13,6 +15,7 @@ namespace Hangfire.Harness.Processing
 
         private readonly int _count;
         private readonly TimeSpan _delay;
+        private long? _lastRecurringUpdate;
 
         public TestHarnessProcess(int count, TimeSpan delay)
         {
@@ -41,8 +44,14 @@ namespace Hangfire.Harness.Processing
                 client.Enqueue<IHarnessV1>(x => x.Perform(0));
             }
 
-            RecurringJob.AddOrUpdate<IHarnessV1>("Infinite", x => x.Infinite(default), Cron.Never);
-            RecurringJob.TriggerJob("Infinite");
+            if (_lastRecurringUpdate == null ||
+                Environment.TickCount > _lastRecurringUpdate.Value + RecurringJobUpdateInterval.TotalMilliseconds)
+            {
+                _lastRecurringUpdate = Environment.TickCount;
+
+                RecurringJob.AddOrUpdate<IHarnessV1>("Infinite", x => x.Infinite(default), Cron.Never);
+                RecurringJob.TriggerJob("Infinite");
+            }
         }
     }
 }
