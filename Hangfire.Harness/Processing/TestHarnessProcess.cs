@@ -40,6 +40,9 @@ namespace Hangfire.Harness.Processing
                 context.StoppingToken.ThrowIfCancellationRequested();
                 client.Enqueue<IHarnessV1>(x => x.Perform(0));
             }
+
+            RecurringJob.AddOrUpdate<IHarnessV1>("Infinite", x => x.Infinite(default), Cron.Never);
+            RecurringJob.TriggerJob("Infinite");
         }
     }
 }
