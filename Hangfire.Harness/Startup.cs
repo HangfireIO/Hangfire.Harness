@@ -35,7 +35,7 @@ namespace Hangfire.Harness
                 GlobalConfiguration.Configuration
                     .UseRedisStorage(ConfigurationManager.AppSettings["RedisStorage"], new RedisStorageOptions
                     {
-                        UseExperimentalTransactions = true
+                        //UseExperimentalTransactions = true
                     })
                     .WithJobExpirationTimeout(TimeSpan.FromHours(1))
                     .UseRedisMetrics();
