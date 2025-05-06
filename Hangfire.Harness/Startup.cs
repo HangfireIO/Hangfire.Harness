@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
 using Autofac;
+using AzureCredentialsSample;
 using Hangfire.Dashboard;
 using Hangfire.Harness;
 using Hangfire.Harness.Processing;
@@ -35,7 +36,8 @@ namespace Hangfire.Harness
                 GlobalConfiguration.Configuration
                     .UseRedisStorage(ConfigurationManager.AppSettings["RedisStorage"], new RedisStorageOptions
                     {
-                        UseExperimentalTransactions = true
+                        UseExperimentalTransactions = true,
+                        CredentialProvider = AzureCacheForRedis.ConfigureForAzureWithSystemAssignedManagedIdentity()
                     })
                     .WithJobExpirationTimeout(TimeSpan.FromHours(1))
                     .UseRedisMetrics();
