@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Net;
 using Autofac;
-using AzureCredentialsSample;
 using Hangfire.Dashboard;
 using Hangfire.Harness;
 using Hangfire.Harness.Processing;
 using Hangfire.Pro.Redis;
+using Hangfire.Pro.Redis.Azure;
 using Hangfire.SqlServer;
 using Microsoft.Owin;
 using Owin;
