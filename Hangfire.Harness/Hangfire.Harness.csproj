@@ -72,10 +72,10 @@
       <HintPath>..\packages\Hangfire.Core.1.8.18\lib\net46\Hangfire.Core.dll</HintPath>
     </Reference>
     <Reference Include="Hangfire.Pro.Redis, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hangfire.Pro.Redis.3.3.0-alpha2\lib\net472\Hangfire.Pro.Redis.dll</HintPath>
+      <HintPath>..\packages\Hangfire.Pro.Redis.3.3.0\lib\net472\Hangfire.Pro.Redis.dll</HintPath>
     </Reference>
     <Reference Include="Hangfire.Pro.Redis.Azure, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hangfire.Pro.Redis.Azure.3.3.0-alpha2\lib\netstandard2.0\Hangfire.Pro.Redis.Azure.dll</HintPath>
+      <HintPath>..\packages\Hangfire.Pro.Redis.Azure.3.3.0\lib\netstandard2.0\Hangfire.Pro.Redis.Azure.dll</HintPath>
     </Reference>
     <Reference Include="Hangfire.SqlServer, Version=1.8.18.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Hangfire.SqlServer.1.8.18\lib\net451\Hangfire.SqlServer.dll</HintPath>
