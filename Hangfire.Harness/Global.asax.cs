@@ -21,7 +21,6 @@ namespace Hangfire.Harness
                 .Enrich.WithProcessId()
                 .Enrich.WithThreadId()
                 .Enrich.WithExceptionDetails()
-                .WriteTo.Seq("https://logs.hangfire.io", apiKey: ConfigurationManager.AppSettings["SeqApiKey"])
                 .MinimumLevel.Verbose()
                 .CreateLogger();
 
