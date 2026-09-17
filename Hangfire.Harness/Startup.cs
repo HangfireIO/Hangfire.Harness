@@ -48,7 +48,8 @@ namespace Hangfire.Harness
                     {
                         DashboardJobListLimit = 1000,
                         EnableHeavyMigrations = true,
-                        InactiveStateExpirationTimeout = TimeSpan.FromDays(7)
+                        InactiveStateExpirationTimeout = TimeSpan.FromDays(7),
+                        SlidingInvisibilityTimeout = null
                     })
                     .WithJobExpirationTimeout(TimeSpan.FromHours(1));
 
