@@ -10,6 +10,9 @@ namespace Hangfire.Harness.Processing
 
         [Queue("{0}")]
         Task Perform(string queue);
+
+        [AutomaticRetry(Attempts = 0, OnAttemptsExceeded = AttemptsExceededAction.Delete)]
+        [DisableConcurrentExecution(timeoutInSeconds: 5)]
         Task<int> Maintenance();
 
         [ProlongExpiration(expirationTimeMinutes: 60 * 24 * 365)]
