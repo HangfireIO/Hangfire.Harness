@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
-using Dapper;
-using Hangfire.States;
 using Microsoft.Data.SqlClient;
+using Dapper;
 
 namespace Hangfire.Harness.Processing
 {
@@ -25,37 +22,6 @@ namespace Hangfire.Harness.Processing
 
         public async Task<int> Maintenance()
         {
-            var inconsistentJobIds = new List<long>();
-            
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["HangfireStorage"].ConnectionString))
-            using (var command = connection.CreateCommand())
-            {
-                command.CommandText = @"
-SET LOCK_TIMEOUT 1000;
-SELECT j.[Id] FROM [HangFire].[Job] j
-LEFT JOIN [HangFire].[JobQueue] jq ON j.[Id] = jq.[JobId]
-WHERE j.[StateName] = N'Enqueued' AND jq.[Id] IS NULL";
-                command.CommandTimeout = 1_000;
-
-                await connection.OpenAsync();
-
-                using (var reader = await command.ExecuteReaderAsync())
-                {
-                    while (reader.Read())
-                    {
-                        var jobId = reader.GetInt64(reader.GetOrdinal("Id"));
-                        inconsistentJobIds.Add(jobId);
-                    }
-                }
-            }
-
-            foreach (var inconsistentJobId in inconsistentJobIds)
-            {
-                BackgroundJob.Requeue(
-                    inconsistentJobId.ToString(CultureInfo.InvariantCulture),
-                    EnqueuedState.StateName);
-            }
-
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["HangfireStorage"].ConnectionString))
             {
                 return await connection.ExecuteAsync("AzureSQLMaintenance", new

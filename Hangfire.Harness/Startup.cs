@@ -52,7 +52,7 @@ namespace Hangfire.Harness
                     })
                     .WithJobExpirationTimeout(TimeSpan.FromHours(1));
 
-                RecurringJob.AddOrUpdate<IHarnessV1>("IHarnessV1.Maintenance", x => x.Maintenance(), "0 */4 * * *");
+                RecurringJob.AddOrUpdate<IHarnessV1>("IHarnessV1.Maintenance", x => x.Maintenance(), Cron.Daily(01, 00));
             }
 
             yield return new BackgroundJobServer(
